@@ -1,0 +1,4 @@
+This is my personal bash set up.
+
+It is recommened that you create this repository in ~/.bash.  Then run the setup.sh script to create symbolic links to the configuration files.
+
