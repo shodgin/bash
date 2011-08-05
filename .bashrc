@@ -45,6 +45,17 @@ alias py='python'
 
 alias reload='source ~/.bashrc'
 
+
+#---------------------------------------------------------------------------
+# Mac Specific Settings 
+#---------------------------------------------------------------------------
+
+if  [ $OSTYPE == 'darwin10.0' ]; then
+	CLICOLOR="xterm-color"  #default ``cons25'', ``xterm-color''
+	LSCOLORS="gxfxcxdxbxegedabagacad"
+fi
+
+
 #---------------------------------------------------------------------------
 # Exports
 #---------------------------------------------------------------------------
@@ -57,6 +68,7 @@ export HISTFILESIZE=3000
 export EDITOR=/usr/bin/vim
 #export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -"
 
+
 #---------------------------------------------------------------------------
 # Shell Options
 #---------------------------------------------------------------------------
@@ -68,25 +80,30 @@ set -o vi #Use vi mode
 # Use case-insensitive filename globbing
 # shopt -s nocaseglob
 
-# Define Color's
-#black='\e[0;30m'
-#blue='\e[0;34m'
-#green='\e[0;32m'
-#cyan='\e[0;36m'
-#red='\e[0;31m'
-#purple='\e[0;35m'
-#brown='\e[0;33m'
-#lightgray='\e[0;37m'
-#darkgray='\e[1;30m'
-#lightblue='\e[1;34m'
-#lightgreen='\e[1;32m'
-#lightcyan='\e[1;36m'
-#lightred='\e[1;31m'
-#lightpurple='\e[1;35m'
-#yellow='\e[1;33m'
-#white='\e[1;37m'
-#nc='\e[0m'              # no color
-# sample command using color: echo -e "${cyan}this is bash${red}${bash_version%.*}${cyan} - display on ${red}$display${nc}\n"
+
+# start color scheme: \e[x;ym
+# end color scheme:   \e[m
+
+# black      0;30  Dark Gray    1;30
+# Blue 	     0;34  Light Blue   1;34
+# Green      0;32  Light Green  1;32
+# Cyan       0;36  Light Cyan   1;36 
+# Red        0;31  Light Red    1;31
+# Purple     0;35  Light Purple 1;35
+# Brown      0;33  Yellow       1;33
+# Light Gray 0;37  White        1;37
+
+# \u    current username
+# \h    hostname
+# \w    current working path          "~/.bash"
+# \W    current working directory     ".bash"
+
+PS1="\e[0;35m\w\e[m"
+if [ $(whoami) == 'root' ]; then
+	PS1="$PS1 \e[0;31m#\e[m "
+else
+	PS1="$PS1 \e[0;32m$\e[m "
+fi
 
 
 #---------------------------------------------------------------------------
@@ -118,9 +135,3 @@ function lswc()
 {
 	for FILE in $(ls); do echo "$FILE - $(cat $FILE | wc -l)"; done
 }
-
-if [ $OSTYPE == 'cygwin' ]; then
-	source $HOME/.bash/`hostname`.sh
-else
-	source $HOME/.bash/`hostname -s`.sh
-fi
