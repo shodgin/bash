@@ -19,11 +19,11 @@
 #alias cp='cp -i'
 #alias mv='mv -i'
 
-if [ $OSTYPE == 'darwin10.0' ]; then
-	alias ls='ls -h  -G'        # classify files in color
-	alias ll='ls -hl -G'        # long list
+if [[ $OSTYPE == darwin* ]]; then
+	alias ls='ls -h -G'        # classify files in color
+	alias ll='ls -hl -G'        # long lis
 	alias la='ls -hA -G'        # all but . and ..
-	alias lal='ls -hlA -G'      # long and all
+	alias lal='ls -hlAi -G'      # long and all
 	alias lc='wc -l'            # count the lines in a document
     export LSCOLORS="gxfxcxdxbxegedabagacad"
 else
